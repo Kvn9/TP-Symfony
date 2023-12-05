@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MarqueController!{% endblock %}
+
+{% block body %}
+
+<h1> Liste des Marques </h1>
+
+<a href= "{{path('ajout_marque')}}" class="btn btn-primary "> Ajouter</a>
+{% if marques is not empty %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nom </th>
+        <th>Logo </th>
+        <th>Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for marq in marques %}
+    <tr>
+        <td>{{marq.nom }} </td>
+        <td>
+        {% if marq.logo is not null %}
+        <img src="{{asset('upload/' ~ marq.logo)}}" style="width:100px;">
+        {% endif %}
+        </td>
+        <td>{{marq.date|date('Y-m-d H:i:s')}} </td>
+        <td>  
+        <a href= "{{path('marke' , {'id': marq.id })}}" class= "btn btn-success"> Afficher</a> 
+        <a href= "{{path('delete_marque' , {'id': marq.id })}}" class="btn btn-danger"> Supprimer</a> 
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% else %}
+<p> Il n'y a aucune marque</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {% endblock %}
+
+{% block body %}
+
+<h1> Liste des Modéles</h1>
+
+<a href= "{{path('ajout_modele')}}" class="btn btn-primary "> Ajouter</a>
+{% if modeles is not empty %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nom </th>
+        <th>Prix Départ </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for model in modeles %}
+    <tr>
+        <td>{{model.nom }} </td>
+        <td>{{model.prixdepart}} </td>
+        <td>  
+        <a href= "{{path('modele' , {'id': model.id })}}" class= "btn btn-success"> Afficher</a> 
+        <a href= "{{path('delete_modele' , {'id': model.id })}}" class="btn btn-danger"> Supprimer</a> 
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% else %}
+<p> Il n'y a aucune marque</p>
+{% endif %}
+
+{% endblock %}
